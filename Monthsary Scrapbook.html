@@ -1,0 +1,379 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Monthsary Scrapbook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;700&family=Special+Elite&display=swap">
+<style>
+/* Layout: a craft desk with paper pieces taped on at slight angles; one scroll, section strips as torn labels. */
+:root{
+  --desk:#8fa89b; --desk-line:rgba(255,255,255,.16); --on-desk:#1d2a25;
+  --paper:#fbf6ea; --paper-ink:#2b2a33; --paper-soft:#625d6a; --paper-edge:#e6dcc4;
+  --rose:#c0392f; --rose-soft:#f3c9c2; --blue:#3a5a85; --sun:#f1c75b;
+  --tape:rgba(241,199,91,.78); --shadow:rgba(28,38,33,.32);
+  --f-hand:"Caveat","Segoe Script","Bradley Hand",cursive;
+  --f-type:"Special Elite","Courier New",monospace;
+  --f-body:"DM Sans",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#1c2925; --desk-line:rgba(255,255,255,.05); --on-desk:#f1ebdc;
+  --paper:#efe6d3; --paper-edge:#d8cbb0; --shadow:rgba(0,0,0,.55); --tape:rgba(224,178,70,.82); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#1c2925; --desk-line:rgba(255,255,255,.05); --on-desk:#f1ebdc;
+  --paper:#efe6d3; --paper-edge:#d8cbb0; --shadow:rgba(0,0,0,.55); --tape:rgba(224,178,70,.82); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{
+  background-color:var(--desk);
+  background-image:
+    repeating-linear-gradient(0deg,var(--desk-line) 0 22px,transparent 22px 44px),
+    repeating-linear-gradient(90deg,var(--desk-line) 0 22px,transparent 22px 44px);
+  color:var(--on-desk); font-family:var(--f-body); font-size:16px; line-height:1.55;
+  padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));
+  padding-block:24px 56px;
+}
+main{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* shared paper pieces */
+.paper{background:var(--paper);color:var(--paper-ink);border-radius:3px;box-shadow:0 1px 0 var(--paper-edge),0 10px 22px -8px var(--shadow);position:relative}
+.taped::before,.taped::after{content:"";position:absolute;top:-12px;width:78px;height:24px;background:var(--tape);transform:rotate(-5deg);z-index:2}
+.taped::before{left:14%}
+.taped::after{right:14%;transform:rotate(4deg)}
+.one-tape::after{display:none}
+.strip{align-self:flex-start;background:var(--paper);color:var(--paper-ink);padding:6px 18px 8px;box-shadow:0 6px 12px -6px var(--shadow);transform:rotate(-1.5deg);position:relative;
+  clip-path:polygon(0 8%,3% 0,7% 6%,12% 0,18% 7%,25% 0,100% 0,100% 100%,0 100%)}
+.strip h2{margin:0;font:700 clamp(1.7rem,6vw,2.3rem)/1.1 var(--f-hand);color:var(--rose)}
+.strip small{display:block;font:.78rem/1.3 var(--f-type);color:var(--paper-soft);letter-spacing:.06em}
+section{display:flex;flex-direction:column;gap:22px;min-width:0}
+.btn{background:var(--rose);color:#fff;border:0;border-radius:999px;padding:10px 22px;font:700 1rem var(--f-body);box-shadow:0 4px 0 #8f2a22;transition:transform .12s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #8f2a22}
+.hand{font-family:var(--f-hand);font-weight:700}
+.type{font-family:var(--f-type)}
+
+/* hero */
+.hero{padding:34px clamp(18px,5vw,44px) 30px;transform:rotate(-.7deg);text-align:left}
+.eyebrow{font:.85rem var(--f-type);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-soft)}
+.hero h1{margin:6px 0 4px;font:700 clamp(3rem,13vw,6.2rem)/.92 var(--f-hand);color:var(--rose);text-wrap:balance}
+.hero p.lead{margin:0 0 22px;max-width:46ch;color:var(--paper-soft)}
+.clock-label{font:.9rem var(--f-type);margin-bottom:10px}
+.clock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:460px}
+.stamp{border:2px solid var(--blue);border-radius:6px;text-align:center;padding:10px 4px 6px;color:var(--blue);transform:rotate(var(--r,0deg))}
+.stamp b{display:block;font:700 clamp(1.7rem,7vw,2.5rem)/1 var(--f-hand);font-variant-numeric:tabular-nums}
+.stamp span{font:.68rem var(--f-type);letter-spacing:.1em;text-transform:uppercase}
+.hero-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
+.chip{font:.85rem var(--f-type);background:var(--rose-soft);color:#5a1d17;padding:5px 12px;border-radius:999px}
+
+/* letters */
+.env-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+.env{position:relative;border:0;padding:30px 12px 14px;min-height:112px;background:var(--rose-soft);color:#4a1c17;border-radius:3px;text-align:center;box-shadow:0 8px 14px -8px var(--shadow);overflow:hidden;transform:rotate(var(--r,0deg))}
+.env::before{content:"";position:absolute;inset:0 0 auto 0;height:56%;background:#e7a99f;clip-path:polygon(0 0,100% 0,50% 100%)}
+.env span{position:relative;display:block;font:700 1.25rem/1.15 var(--f-hand)}
+.env small{position:relative;display:block;font:.7rem var(--f-type);letter-spacing:.06em;margin-bottom:4px}
+.env[aria-expanded="true"]{outline:3px solid var(--rose);outline-offset:2px}
+.letter{padding:26px clamp(18px,4vw,36px) 26px;transform:rotate(.4deg)}
+.letter h3{margin:0 0 10px;font:700 1.9rem/1.1 var(--f-hand);color:var(--rose)}
+.letter p{margin:0 0 12px;max-width:58ch}
+.sign{font:700 1.5rem var(--f-hand);color:var(--blue)}
+
+/* reasons */
+.jar-row{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:22px;align-items:center}
+.jar{padding:22px 16px;text-align:center;transform:rotate(-1.5deg)}
+.jar .big{font:700 3.4rem/1 var(--f-hand);color:var(--rose)}
+.slip{min-height:150px;padding:22px 24px;background:#fffdf4;transform:rotate(1deg);display:flex;flex-direction:column;justify-content:center;gap:8px}
+.slip q{font:700 clamp(1.4rem,4.4vw,1.9rem)/1.25 var(--f-hand);quotes:none}
+.slip.pop{animation:pop .35s ease-out}
+@keyframes pop{from{transform:rotate(-3deg) scale(.94);opacity:.4}to{transform:rotate(1deg) scale(1);opacity:1}}
+@media (max-width:560px){.jar-row{grid-template-columns:1fr}}
+
+/* scratch + game */
+.card{padding:26px clamp(18px,4vw,34px)}
+.scratch-wrap{position:relative;width:100%;max-width:560px;aspect-ratio:560/240;margin-inline:auto;transform:rotate(-1deg)}
+.scratch-msg{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:18px;background:#fffdf4;font:700 clamp(1.3rem,4.6vw,2rem)/1.25 var(--f-hand);color:var(--rose)}
+#scratch{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;transition:opacity .8s}
+#scratch.gone{opacity:0;pointer-events:none}
+.game{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:22px;align-items:start}
+.game canvas{width:100%;height:auto;background:#fffdf4;touch-action:none;border:2px solid var(--paper-ink);display:block}
+.game-side{display:flex;flex-direction:column;gap:12px}
+.score{font:700 2.6rem/1 var(--f-hand);color:var(--rose);font-variant-numeric:tabular-nums}
+.unlock{padding:14px 16px;background:#fffdf4;font:700 1.35rem/1.3 var(--f-hand);color:var(--blue)}
+@media (max-width:640px){.game{grid-template-columns:1fr}}
+
+/* playlist */
+.tracks{display:grid;gap:12px;padding:0;margin:0;list-style:none}
+.track{display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;align-items:center;padding:12px 16px}
+.disc{width:48px;height:48px;border-radius:50%;background:radial-gradient(circle,var(--rose) 0 22%,#25232b 23% 100%);box-shadow:inset 0 0 0 5px #3a3842}
+.t-title{font:700 1.35rem/1.1 var(--f-hand)}
+.t-sub{font:.78rem var(--f-type);color:var(--paper-soft)}
+.t-note{margin:2px 0 0;font-size:.95rem}
+
+/* closing */
+.closing{padding:36px clamp(18px,5vw,48px);text-align:center;transform:rotate(.6deg)}
+.closing p.big{margin:0 auto 10px;max-width:30ch;font:700 clamp(1.9rem,7vw,3rem)/1.15 var(--f-hand);color:var(--rose)}
+.closing p{margin:0 auto 12px;max-width:50ch}
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+.hearts i{position:absolute;bottom:-30px;font-style:normal;color:var(--rose);animation:rise 6s ease-in forwards}
+@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.hearts{display:none}.slip.pop{animation:none}}
+</style>
+
+<main>
+  <!-- HERO -->
+  <header class="paper taped hero">
+    <div class="eyebrow" id="eyebrow">November 18 · monthsary</div>
+    <h1 id="title">Happy monthsary, Love</h1>
+    <p class="lead">I made you a little scrapbook. Open the letters, pull a slip from the jar, scratch the card, and catch some hearts. Everything in here is for you.</p>
+    <div class="clock-label" id="clockLabel">Counting…</div>
+    <div class="clock" id="clock">
+      <div class="stamp" style="--r:-2deg"><b id="cD">0</b><span>days</span></div>
+      <div class="stamp" style="--r:1.5deg"><b id="cH">0</b><span>hours</span></div>
+      <div class="stamp" style="--r:-1deg"><b id="cM">0</b><span>mins</span></div>
+      <div class="stamp" style="--r:2deg"><b id="cS">0</b><span>secs</span></div>
+    </div>
+    <div class="hero-foot">
+      <button class="btn" id="musicBtn" aria-pressed="false">Play a music box</button>
+      <span class="chip" id="meetChip" hidden></span>
+    </div>
+  </header>
+
+  <!-- LETTERS -->
+  <section id="letters">
+    <div class="strip"><h2>Open when…</h2><small>SEALED ENVELOPES, PICK ONE</small></div>
+    <div class="env-grid" id="envGrid"></div>
+    <div class="paper letter" id="letterPanel" hidden aria-live="polite"></div>
+  </section>
+
+  <!-- REASONS -->
+  <section id="reasons">
+    <div class="strip"><h2>Reasons I love you</h2><small>PULL A SLIP FROM THE JAR</small></div>
+    <div class="jar-row">
+      <div class="paper taped one-tape jar">
+        <div class="big" id="jarCount">12</div>
+        <div class="type" style="font-size:.8rem">slips left to read</div>
+        <button class="btn" id="pullBtn" style="margin-top:14px">Pull a slip</button>
+      </div>
+      <div class="paper slip" id="slip"><span class="t-sub">Your first slip is waiting.</span><q>Tap the button and see.</q></div>
+    </div>
+  </section>
+
+  <!-- SCRATCH -->
+  <section id="scratchSec">
+    <div class="strip"><h2>Scratch me</h2><small>USE YOUR FINGER OR MOUSE</small></div>
+    <div class="scratch-wrap paper">
+      <div class="scratch-msg" id="scratchMsg">Something small, just for you. Happy monthsary, Love.</div>
+      <canvas id="scratch" width="560" height="240" aria-label="Scratch card"></canvas>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section id="gameSec">
+    <div class="strip"><h2>Catch the hearts</h2><small>CATCH 12 TO UNLOCK A SECRET</small></div>
+    <div class="game paper card">
+      <canvas id="game" width="360" height="440" aria-label="Heart catching game"></canvas>
+      <div class="game-side">
+        <div class="score"><span id="gScore">0</span> / 12</div>
+        <p style="margin:0">Drag across the game, or use the left and right arrow keys, to move the paper bag.</p>
+        <button class="btn" id="gStart">Start</button>
+        <div class="unlock" id="unlock" hidden>Level cleared. You catch my heart every single day, and you never even have to try.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAYLIST -->
+  <section id="playlist">
+    <div class="strip"><h2>Our playlist</h2><small>SIDE A</small></div>
+    <ol class="tracks" id="tracks"></ol>
+  </section>
+
+  <!-- CLOSING -->
+  <footer class="paper taped closing">
+    <p class="big">Thank you for being my favorite person.</p>
+    <p>Every month with you is my favorite chapter so far. I can't wait to fill the rest of this scrapbook with you.</p>
+    <p class="sign" id="signoff">Forever yours, Sam</p>
+    <button class="btn" id="heartBtn" style="margin-top:12px">Send you some hearts</button>
+  </footer>
+</main>
+<div class="hearts" id="hearts" aria-hidden="true"></div>
+
+<script>
+/* ===== EDIT ME: everything personal lives in this block ===== */
+const CFG = {
+  from: "Sam",
+  monthsary: "2026-11-18T00:00:00+08:00",   // the monthsary itself (Manila time)
+  start: null,                               // e.g. "2026-05-18T00:00:00+08:00" to show time together and the month number
+  nextMeet: null,                            // e.g. "2027-01-10T08:00:00+08:00" to show a countdown to seeing each other
+};
+const LETTERS = [
+  {k:"you miss me", t:"Open when you miss me", p:["I miss you too. Right now, probably at the same time, and that thought always makes the distance feel smaller.","Close your eyes for a second and picture me next to you, being annoying and holding your hand. I'm there in every way that counts."]},
+  {k:"you had a bad day", t:"Open when you had a bad day", p:["First, a hug. A long one, the kind that lasts too long and nobody lets go.","You don't have to be strong or fine or anything. Tell me about it, or don't, and I'll just stay with you. You've gotten through every hard day so far, and I'm proud of you."]},
+  {k:"you can't sleep", t:"Open when you can't sleep", p:["Put the phone down in a minute, but first: you did enough today. Tomorrow can wait its turn.","Take a slow breath, and know that somebody on the other side of the screen is thinking about you and wishing you the softest sleep. Goodnight, Love."]},
+  {k:"you need a smile", t:"Open when you need a smile", p:["Remember the last time we laughed so hard we couldn't talk? I'm laughing again just thinking of it.","You make my silly little life brighter just by being in it. Now smile. I know you're doing it."]},
+  {k:"we're apart again", t:"Open when we're apart again", p:["Goodbyes are the worst part of us, and also the proof of how good the rest is.","Every goodbye is just one step closer to the next hello. Hold on to that. I'm holding on to you."]},
+];
+const REASONS = [
+  "You make ordinary days feel like they matter.",
+  "Your laugh is my favorite sound, and I'd spend all day trying to hear it.",
+  "You are kind even when nobody is watching.",
+  "You listen like what I say is important, and that makes me feel safe.",
+  "You push me to be a better person without ever making me feel small.",
+  "You make waiting for you feel worth it.",
+  "You're beautiful, and it's the least interesting thing about you.",
+  "You love hard, and I get to be on the receiving end.",
+  "You make my silliest ideas sound like great ones.",
+  "Home isn't a place anymore. It's talking to you.",
+  "You believe in me on the days I forget to.",
+  "Because it's you. It's always going to be you.",
+];
+const SONGS = [
+  {t:"Our theme song", a:"IF by Bread", n:"The one that started playing and suddenly meant something."},
+  {t:"The one you sent me", a:"YOU by Carpenters", n:"I played it on repeat until I knew every word."},
+  {t:"Our late-night song", a:"ANY LOVE SONGS", n:"For long calls and quiet voices."},
+  {t:"The one that's you", a:"Pag ibig ng ikaw at ako by Earl Agustin", n:"I hear it and I think of you, every time."},
+];
+
+/* ===== helpers ===== */
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,"0");
+const ord=n=>{const s=["th","st","nd","rd"],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0])};
+const mDate=new Date(CFG.monthsary), sDate=CFG.start?new Date(CFG.start):null;
+
+/* hero title + counter */
+if(sDate){
+  let n=(mDate.getFullYear()-sDate.getFullYear())*12+mDate.getMonth()-sDate.getMonth();
+  if(mDate.getDate()<sDate.getDate()) n--;
+  if(n>0){$("title").textContent="Happy "+ord(n)+" monthsary, Love";$("eyebrow").textContent="November 18 · month "+n}
+}
+function setClock(ms){
+  const t=Math.max(0,Math.floor(ms/1000));
+  $("cD").textContent=Math.floor(t/86400);$("cH").textContent=pad(Math.floor(t%86400/3600));
+  $("cM").textContent=pad(Math.floor(t%3600/60));$("cS").textContent=pad(t%60);
+}
+function tick(){
+  const now=Date.now();
+  if(sDate){$("clockLabel").textContent="We've been together for";setClock(now-sDate)}
+  else if(now<mDate){$("clockLabel").textContent="Our monthsary starts in";setClock(mDate-now)}
+  else{$("clockLabel").textContent="It's our monthsary! Since midnight:";setClock(now-mDate)}
+  if(CFG.nextMeet){const d=new Date(CFG.nextMeet)-now;const c=$("meetChip");c.hidden=false;
+    c.textContent=d>0?"Next time I see you: "+Math.ceil(d/86400000)+" days":"I get to see you today"}
+}
+tick();setInterval(tick,1000);
+
+/* letters */
+$("envGrid").innerHTML=LETTERS.map((l,i)=>`<button class="env" style="--r:${[-1.5,1,-.5,1.8,-1][i%5]}deg" data-i="${i}" aria-expanded="false" aria-controls="letterPanel"><small>OPEN WHEN</small><span>${l.k}</span></button>`).join("");
+$("envGrid").addEventListener("click",e=>{
+  const b=e.target.closest(".env");if(!b)return;
+  const open=b.getAttribute("aria-expanded")==="true";
+  document.querySelectorAll(".env").forEach(x=>x.setAttribute("aria-expanded","false"));
+  const p=$("letterPanel");
+  if(open){p.hidden=true;return}
+  b.setAttribute("aria-expanded","true");
+  const l=LETTERS[+b.dataset.i];
+  p.innerHTML=`<h3>${l.t}</h3>${l.p.map(x=>`<p>${x}</p>`).join("")}<div class="sign">— ${CFG.from}</div>`;
+  p.hidden=false;p.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+
+/* reasons */
+let pool=[],seen=0;
+function pull(){
+  if(!pool.length){pool=REASONS.map((_,i)=>i).sort(()=>Math.random()-.5);seen=0}
+  const i=pool.pop();seen++;
+  const s=$("slip");
+  s.innerHTML=`<span class="t-sub">slip ${seen} of ${REASONS.length}</span><q>${REASONS[i]}</q>`;
+  s.classList.remove("pop");void s.offsetWidth;s.classList.add("pop");
+  $("jarCount").textContent=pool.length;
+  $("pullBtn").textContent=pool.length?"Pull another":"Start the jar again";
+}
+$("pullBtn").onclick=pull;
+
+/* scratch card */
+(function(){
+  const cv=$("scratch"),ctx=cv.getContext("2d");let down=false,done=false;
+  function cover(){
+    ctx.globalCompositeOperation="source-over";
+    const g=ctx.createLinearGradient(0,0,cv.width,cv.height);
+    g.addColorStop(0,"#c9c3b4");g.addColorStop(.5,"#e4dfd2");g.addColorStop(1,"#b7b09f");
+    ctx.fillStyle=g;ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.fillStyle="#5d5848";ctx.font="700 38px Caveat, cursive";ctx.textAlign="center";
+    ctx.fillText("scratch here, Love ♥",cv.width/2,cv.height/2+12);
+  }
+  cover();
+  function pos(e){const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]}
+  function scr(e){
+    if(!down||done)return;const[x,y]=pos(e);
+    ctx.globalCompositeOperation="destination-out";ctx.beginPath();ctx.arc(x,y,22,0,7);ctx.fill();
+  }
+  function check(){
+    const d=ctx.getImageData(0,0,cv.width,cv.height).data;let c=0,n=0;
+    for(let i=3;i<d.length;i+=64){n++;if(d[i]<20)c++}
+    if(c/n>.5){done=true;cv.classList.add("gone")}
+  }
+  cv.addEventListener("pointerdown",e=>{down=true;cv.setPointerCapture(e.pointerId);scr(e)});
+  cv.addEventListener("pointermove",scr);
+  cv.addEventListener("pointerup",()=>{down=false;check()});
+  cv.addEventListener("pointercancel",()=>{down=false});
+})();
+
+/* catch the hearts */
+(function(){
+  const cv=$("game"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;
+  let bag={x:W/2,w:84},hearts=[],score=0,run=false,last=0,spawn=0,won=false;
+  function draw(){
+    ctx.fillStyle="#fffdf4";ctx.fillRect(0,0,W,H);
+    ctx.textAlign="center";ctx.font="30px Caveat, cursive";ctx.fillStyle="#c0392f";
+    hearts.forEach(h=>ctx.fillText("♥",h.x,h.y));
+    ctx.fillStyle="#b88a52";ctx.fillRect(bag.x-bag.w/2,H-46,bag.w,36);
+    ctx.fillStyle="#9a7240";ctx.fillRect(bag.x-bag.w/2,H-46,bag.w,6);
+    if(!run){ctx.fillStyle="#2b2a33";ctx.font="700 30px Caveat, cursive";ctx.fillText(won?"You did it!":"Press start",W/2,H/2)}
+  }
+  function step(t){
+    if(!run)return;
+    const dt=Math.min(40,t-last)/1000;last=t;spawn-=dt;
+    if(spawn<=0){hearts.push({x:24+Math.random()*(W-48),y:-20,v:110+Math.random()*80+score*6});spawn=.75}
+    hearts.forEach(h=>h.y+=h.v*dt);
+    hearts=hearts.filter(h=>{
+      if(h.y>H-46&&h.y<H-6&&Math.abs(h.x-bag.x)<bag.w/2+8){score++;$("gScore").textContent=score;return false}
+      return h.y<H+30});
+    if(score>=12){run=false;won=true;$("unlock").hidden=false;$("gStart").textContent="Play again"}
+    draw();if(run)requestAnimationFrame(step);
+  }
+  function move(e){const r=cv.getBoundingClientRect();bag.x=Math.min(W-bag.w/2,Math.max(bag.w/2,(e.clientX-r.left)*W/r.width));if(!run)draw()}
+  cv.addEventListener("pointerdown",e=>{cv.setPointerCapture(e.pointerId);move(e)});
+  cv.addEventListener("pointermove",move);
+  addEventListener("keydown",e=>{
+    if(e.key==="ArrowLeft"||e.key==="ArrowRight"){
+      const r=cv.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;
+      bag.x=Math.min(W-bag.w/2,Math.max(bag.w/2,bag.x+(e.key==="ArrowLeft"?-28:28)));if(!run)draw();e.preventDefault()}});
+  $("gStart").onclick=()=>{score=0;hearts=[];won=false;$("gScore").textContent=0;$("unlock").hidden=true;run=true;last=performance.now();spawn=0;$("gStart").textContent="Restart";requestAnimationFrame(step)};
+  draw();
+})();
+
+/* playlist */
+$("tracks").innerHTML=SONGS.map(s=>`<li class="paper track"><div class="disc"></div><div><div class="t-title">${s.t}</div><div class="t-sub">${s.a}</div><p class="t-note">${s.n}</p></div></li>`).join("");
+
+/* closing */
+$("signoff").textContent="Forever yours, "+CFG.from;
+$("heartBtn").onclick=()=>{
+  const box=$("hearts");
+  for(let i=0;i<22;i++){const h=document.createElement("i");h.textContent="♥";
+    h.style.left=Math.random()*100+"%";h.style.fontSize=(16+Math.random()*28)+"px";h.style.animationDelay=Math.random()*1.2+"s";
+    box.appendChild(h);setTimeout(()=>h.remove(),8000)}
+};
+
+/* music box */
+(function(){
+  let ctx=null,timer=null;const notes=[523.25,587.33,659.25,783.99,880,1046.5];
+  function ping(){
+    const o=ctx.createOscillator(),g=ctx.createGain(),f=notes[Math.floor(Math.random()*notes.length)];
+    o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(.0001,ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.12,ctx.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+1.4);
+    o.connect(g).connect(ctx.destination);o.start();o.stop(ctx.currentTime+1.5);
+  }
+  $("musicBtn").onclick=function(){
+    const on=this.getAttribute("aria-pressed")==="true";
+    if(on){clearInterval(timer);timer=null;this.setAttribute("aria-pressed","false");this.textContent="Play a music box";return}
+    try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();ctx.resume();ping();timer=setInterval(ping,520);
+      this.setAttribute("aria-pressed","true");this.textContent="Stop the music box"}catch(e){this.textContent="Sound isn't available here"}
+  };
+})();
+</script>
+
+</body></html>
